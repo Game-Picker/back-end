@@ -1,5 +1,3 @@
-// Update with your config settings.
-
 module.exports = {
   development: {
     client: "pg",
@@ -34,6 +32,5 @@ module.exports = {
     seeds: {
       directory: "./data/seeds",
     },
-    useNullAsDefault: true,
   },
 };

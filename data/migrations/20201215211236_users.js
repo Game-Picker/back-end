@@ -1,15 +1,13 @@
 exports.up = function (knex) {
-  let createQuery = `CREATE TABLE users(
-      id BIGSERIAL PRIMARY KEY NOT NULL,
-      first_name VARCHAR(128) NOT NULL,
-      last_name VARCHAR(128) NOT NULL,
-      email VARCHAR(256) NOT NULL,
-      password VARCHAR(128) NOT NULL
-  )`;
-  return knex.raw(createQuery);
+  return knex.schema.createTable("users", (table) => {
+    table.increments();
+    table.varchar("first_name", 128).notNullable();
+    table.varchar("last_name", 128).notNullable();
+    table.varchar("email", 128).notNullable().unique();
+    table.varchar("password", 128).notNullable();
+  });
 };
 
 exports.down = function (knex) {
-  let dropQuery = `DROP TABLE users`;
-  return knex.raw(dropQuery);
+  return knex.schema.dropTableIfExists("users");
 };

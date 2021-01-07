@@ -1,3 +1,5 @@
+const pgConnection = `${process.env.DATABASE_URL}?sslmode=require`;
+
 module.exports = {
   development: {
     client: "pg",
@@ -26,7 +28,7 @@ module.exports = {
   production: {
     client: "pg",
     useNullAsDefault: true,
-    connection: process.env.DATABASE_URL,
+    connection: pgConnection,
     pool: {
       min: 2,
       max: 10,

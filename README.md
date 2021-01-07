@@ -1,6 +1,6 @@
 # Postgres Game Picker API Documentation
 
-Base URL:
+Base URL: https://gamers-choice.herokuapp.com/
 
 ## Authentication:
 

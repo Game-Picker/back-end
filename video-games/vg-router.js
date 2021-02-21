@@ -18,35 +18,35 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  Games.findById(id)
-    .then((game) => {
-      if (game) {
+  if (id === "random") {
+    Games.pickRandomGame()
+      .then((game) => {
         res.status(200).json(game);
-      } else {
-        res.status(404).json({
-          message: `Cannot find game #${id}`,
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: err.message,
+          stack: err.stack,
         });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack,
       });
-    });
-});
-
-router.get("/random", (req, res) => {
-  Games.pickRandomGame()
-    .then((game) => {
-      res.status(200).json(game);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack,
+  } else {
+    Games.findById(id)
+      .then((game) => {
+        if (game) {
+          res.status(200).json(game);
+        } else {
+          res.status(404).json({
+            message: `Cannot find game #${id}`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: err.message,
+          stack: err.stack,
+        });
       });
-    });
+  }
 });
 
 router.post("/", restricted, (req, res) => {

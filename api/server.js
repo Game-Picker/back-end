@@ -11,9 +11,18 @@ const server = express();
 
 server.get("/", (req, res) => {
   res.send(`
-    <p>
-        Hello, Welcome to the API. 
-    </p>
+    <h1>Postgres Game Picker API Documentation</h1>
+    <br />
+    <ul>
+        <li>Base URL: https://gamers-choice.herokuapp.com/</li>
+    </ul>
+    <br />
+    <h3>Authentication:</h3>
+    <br />
+    <ul>
+        <li>Post - /auth/register</li>
+        <li>Post - /auth/login</li>
+    </ul>
   `);
 });
 

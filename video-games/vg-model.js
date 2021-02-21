@@ -3,6 +3,7 @@ const db = require("../data/db-config");
 module.exports = {
   find,
   findById,
+  pickRandomGame,
   create,
   update,
   remove,
@@ -14,6 +15,10 @@ function find() {
 
 function findById(id) {
   return db("games").where({ id }).first();
+}
+
+function pickRandomGame() {
+  return db("games").orderByRaw("RANDOM()").limit(1);
 }
 
 function create(game) {

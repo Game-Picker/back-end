@@ -36,6 +36,19 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.get("/random", (req, res) => {
+  Games.pickRandomGame()
+    .then((game) => {
+      res.status(200).json(game);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err.message,
+        stack: err.stack,
+      });
+    });
+});
+
 router.post("/", restricted, (req, res) => {
   const newGame = req.body;
   Games.create(newGame)

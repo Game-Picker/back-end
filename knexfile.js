@@ -1,43 +1,34 @@
-const pgConnection = `${process.env.DATABASE_URL}?sslmode=require`;
+const pg = require("pg");
+
+const localConnection = "postgresql://localhost/video_game_db";
+
+let connection;
+
+if (process.env.DATABASE_URL) {
+  pg.defaults.ssl = { rejectUnauthorized: false };
+  connection = process.env.DATABASE_URL;
+} else {
+  connection = localConnection;
+}
+
+const devConfig = {
+  client: "pg",
+  connection: "postgresql://localhost/video_game_db",
+  migrations: { directory: "./data/migrations" },
+  seeds: { directory: "./data/seeds" },
+};
+
+const prodConfig = {
+  client: "pg",
+  connection,
+  migrations: { directory: "./data/migrations" },
+  seeds: { directory: "./data/seeds" },
+};
 
 module.exports = {
-  development: {
-    client: "pg",
-    connection: "postgres://localhost/video_game_db",
-    migrations: {
-      directory: "./data/migrations",
-    },
-    seeds: {
-      directory: "./data/seeds",
-    },
-    useNullAsDefault: true,
-  },
-
-  test: {
-    client: "pg",
-    connection: "postgres://localhost/video_game_db_test",
-    migrations: {
-      directory: "./data/migrations",
-    },
-    seeds: {
-      directory: "./data/seeds",
-    },
-    useNullAsDefault: true,
-  },
-
+  development: { ...devConfig },
   production: {
-    client: "pg",
-    useNullAsDefault: true,
-    connection: pgConnection,
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      directory: "./data/migrations",
-    },
-    seeds: {
-      directory: "./data/seeds",
-    },
+    ...prodConfig,
+    pool: { min: 2, max: 10 },
   },
 };

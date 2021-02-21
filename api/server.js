@@ -9,6 +9,14 @@ const gamesRouter = require("../video-games/vg-router");
 
 const server = express();
 
+server.get("/", (req, res) => {
+  res.send(`
+    <p>
+        Hello, Welcome to the API. 
+    </p>
+  `);
+});
+
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(helmet());

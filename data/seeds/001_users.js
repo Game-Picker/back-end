@@ -10,12 +10,14 @@ exports.seed = function (knex) {
           last_name: "Viodes",
           email: "djviodes26@gmail.com",
           password: bcrypt.hashSync("^g7B84rY*v16%lHn", 14),
+          admin: true,
         },
         {
           first_name: "Jonah",
           last_name: "Salazar",
           email: "jonahsalazar1996@gmail.com",
           password: bcrypt.hashSync("DunderMifflin098?", 14),
+          admin: true,
         },
       ]);
     });

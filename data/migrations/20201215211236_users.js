@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.varchar("last_name", 128).notNullable();
     table.varchar("email", 128).notNullable().unique();
     table.varchar("password", 128).notNullable();
+    table.bool("admin").notNullable();
   });
 };
 

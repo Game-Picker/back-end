@@ -22,6 +22,13 @@ function pickRandomGame() {
 }
 
 function create(game) {
+  if (game.consoles) {
+    db("games_consoles").insert(
+      game.consoles.map((ids) => {
+        return ids;
+      })
+    );
+  }
   return db("games")
     .insert(game)
     .returning("id")

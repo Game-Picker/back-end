@@ -3,27 +3,22 @@ const db = require("../data/db-config");
 module.exports = {
   find,
   findById,
-  pickRandomGame,
   create,
   update,
   remove,
 };
 
 function find() {
-  return db("games");
+  return db("developers");
 }
 
 function findById(id) {
-  return db("games").where({ id }).first();
+  return db("developers").where({ id }).first();
 }
 
-function pickRandomGame() {
-  return db("games").orderByRaw("RANDOM()").limit(1);
-}
-
-function create(game) {
-  return db("games")
-    .insert(game)
+function create(developer) {
+  return db("developers")
+    .insert(developer)
     .returning("id")
     .then((ids) => {
       const id = ids[0];
@@ -32,7 +27,7 @@ function create(game) {
 }
 
 function update(id, changes) {
-  return db("games")
+  return db("developers")
     .where({ id })
     .update(changes)
     .then(() => {
@@ -41,5 +36,5 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  return db("games").where({ id }).del();
+  return db("developers").where({ id }).del();
 }

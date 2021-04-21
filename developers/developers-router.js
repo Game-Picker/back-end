@@ -14,7 +14,11 @@ router.get("/", restricted, async (req, res, next) => {
 });
 
 router.get("/:id", restricted, validateId, (req, res, next) => {
-  res.status(200).json(req.developerRequested);
+  try {
+    res.status(200).json(req.developer);
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.post("/", async (req, res, next) => {

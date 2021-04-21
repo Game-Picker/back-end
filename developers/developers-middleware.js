@@ -10,7 +10,7 @@ const validateId = async (req, res, next) => {
         message: `Cannot find developer #${id}`,
       });
     } else {
-      req.developerRequested = developer;
+      req.developer = developer;
       next();
     }
   } catch (err) {

@@ -10,7 +10,7 @@ const validateId = async (req, res, next) => {
         message: `Cannot find user #${id}`,
       });
     } else {
-      req.userRequested = user;
+      req.user = user;
       next();
     }
   } catch (err) {

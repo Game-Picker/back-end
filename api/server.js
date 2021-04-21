@@ -52,4 +52,12 @@ server.use("/api/users", userRouter);
 server.use("/api/games", gamesRouter);
 server.use("/api/developers", developersRouter);
 
+server.use((err, req, res) => {
+  res.status(500).json({
+    message: err.message,
+    stack: err.stack,
+    error: err,
+  });
+});
+
 module.exports = server;

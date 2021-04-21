@@ -4,7 +4,7 @@ const Developers = require("./developers-model");
 const restricted = require("../auth/restricted-middleware");
 const { validateId } = require("./developers-middleware");
 
-router.get("/", async (req, res, next) => {
+router.get("/", restricted, async (req, res, next) => {
   try {
     const developers = await Developers.find();
     res.status(200).json(developers);
@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", validateId, (req, res, next) => {
+router.get("/:id", restricted, validateId, (req, res, next) => {
   res.status(200).json(req.developerRequested);
 });
 
@@ -28,7 +28,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", validateId, async (req, res, next) => {
+router.put("/:id", restricted, validateId, async (req, res, next) => {
   const changes = req.body;
   const { id } = req.params;
 
@@ -40,7 +40,7 @@ router.put("/:id", validateId, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", validateId, async (req, res, next) => {
+router.delete("/:id", restricted, validateId, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -49,14 +49,6 @@ router.delete("/:id", validateId, async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
-
-router.use((err, req, res) => {
-  res.status(500).json({
-    message: err.message,
-    stack: err.stack,
-    error: err,
-  });
 });
 
 module.exports = router;

@@ -1,82 +1,43 @@
 const router = require("express").Router();
 
 const Users = require("./user-model");
+const { validateId } = require("./user-middleware");
 const restricted = require("../auth/restricted-middleware");
 
-router.get("/", restricted, (req, res) => {
-  Users.find()
-    .then((users) => {
-      res.status(200).json(users);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack,
-      });
-    });
+router.get("/", restricted, async (req, res, next) => {
+  try {
+    const users = await Users.find();
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.get("/:id", restricted, (req, res) => {
-  const { id } = req.params;
-  Users.findById(id)
-    .then((user) => {
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(404).json({
-          message: `Cannot find user #${id}`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack,
-      });
-    });
+router.get("/:id", restricted, validateId, async (req, res, next) => {
+  res.status(200).json(req.userRequested);
 });
 
-router.put("/:id", restricted, (req, res) => {
-  const { id } = req.params;
+router.put("/:id", restricted, validateId, async (req, res, next) => {
   const changes = req.body;
-  Users.findById(id)
-    .then((user) => {
-      if (user) {
-        Users.update(id, changes).then((updatedUser) => {
-          res.status(200).json(updatedUser);
-        });
-      } else {
-        res.status(404).json({
-          message: `Cannot find user #${id}`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack,
-      });
-    });
+  const { id } = req.params;
+
+  try {
+    const updatedUser = await Users.update(id, changes);
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.delete("/:id", restricted, (req, res) => {
+router.delete("/:id", restricted, validateId, async (req, res, next) => {
   const { id } = req.params;
-  Users.remove(id)
-    .then((user) => {
-      if (user) {
-        res.status(204).end();
-      } else {
-        res.status(404).json({
-          message: `Cannot find user #${id}`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err.message,
-        stack: err.stack,
-      });
-    });
+
+  try {
+    const deletedUser = await Users.remove(id);
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

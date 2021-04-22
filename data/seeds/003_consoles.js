@@ -1,3 +1,4 @@
+// *** [ Function To Autopopulate Consoles Into Consoles Table ] *** //
 exports.seed = function (knex) {
   return knex("consoles").then(() => {
     return knex("consoles").insert([

@@ -1,7 +1,9 @@
+// *** [ Imports ] *** //
 const jwt = require("jsonwebtoken");
 
 const { jwtSecret } = require("./secret");
 
+// *** [ Function To Restrict Use Of Routes By Unauthorized Users ] *** //
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {

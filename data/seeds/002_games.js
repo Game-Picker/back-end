@@ -1,3 +1,4 @@
+// *** [ Function To Autopopulate Games Into Games Table ] *** //
 exports.seed = function (knex) {
   return knex("games").then(() => {
     return knex("games").insert([

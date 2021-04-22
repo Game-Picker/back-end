@@ -1,5 +1,7 @@
+// *** [ Imports ] *** //
 const db = require("../data/db-config");
 
+// *** [ Exports ] *** //
 module.exports = {
   find,
   findBy,
@@ -8,10 +10,12 @@ module.exports = {
   remove,
 };
 
+// *** [ Function To Get All Users From Users Table ] *** //
 function find() {
   return db("users");
 }
 
+// *** [ Functions To Get Specified User From Users Table ] *** //
 function findBy(filter) {
   return db("users").where(filter).orderBy("id");
 }
@@ -20,6 +24,7 @@ function findById(id) {
   return db("users").where({ id }).first();
 }
 
+// *** [ Function To Change An Exisiting User In Users Table ] *** //
 async function update(id, changes) {
   const count = await db("users").where({ id }).update(changes);
   if (count) {
@@ -29,6 +34,7 @@ async function update(id, changes) {
   }
 }
 
+// *** [ Function To Remove An Exisiting User From Users Table ] *** //
 async function remove(id) {
   const user = await db("users").where({ id }).first();
   if (!user) {

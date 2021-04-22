@@ -1,3 +1,4 @@
+// *** [ Imports ] *** //
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
@@ -5,6 +6,7 @@ const router = require("express").Router();
 const { jwtSecret } = require("./secret");
 const Users = require("../users/user-model");
 
+// *** [ Login Route ] *** //
 router.post("/login", async (req, res, next) => {
   const credentials = req.body;
   const { email, password } = credentials;
@@ -27,6 +29,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+// *** [ Function To Create A Token ] *** //
 const makeToken = (user) => {
   const payload = {
     subject: user.id,
@@ -38,4 +41,5 @@ const makeToken = (user) => {
   return jwt.sign(payload, jwtSecret, options);
 };
 
+// *** [ Exports ] *** //
 module.exports = router;

@@ -1,9 +1,11 @@
+// *** [ Imports ] *** //
 const router = require("express").Router();
 
 const Developers = require("./developers-model");
 const restricted = require("../auth/restricted-middleware");
 const { validateId } = require("./developers-middleware");
 
+// *** [ GET All Route ] *** //
 router.get("/", restricted, async (req, res, next) => {
   try {
     const developers = await Developers.find();
@@ -13,6 +15,7 @@ router.get("/", restricted, async (req, res, next) => {
   }
 });
 
+// *** [ GET Specified Route ] *** //
 router.get("/:id", restricted, validateId, (req, res, next) => {
   try {
     res.status(200).json(req.developer);
@@ -21,6 +24,7 @@ router.get("/:id", restricted, validateId, (req, res, next) => {
   }
 });
 
+// *** [ POST Route ] *** //
 router.post("/", async (req, res, next) => {
   const developer = req.body;
 
@@ -32,6 +36,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+// *** [ PUT Route ] *** //
 router.put("/:id", restricted, validateId, async (req, res, next) => {
   const changes = req.body;
   const { id } = req.params;
@@ -44,6 +49,7 @@ router.put("/:id", restricted, validateId, async (req, res, next) => {
   }
 });
 
+// *** [ DELETE Route ] *** //
 router.delete("/:id", restricted, validateId, async (req, res, next) => {
   const { id } = req.params;
 
@@ -55,4 +61,5 @@ router.delete("/:id", restricted, validateId, async (req, res, next) => {
   }
 });
 
+// *** [ Exports ] *** //
 module.exports = router;

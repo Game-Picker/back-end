@@ -1,3 +1,4 @@
+// *** [ Function To Autopopulate Ratings Into Ratings table ] *** //
 exports.seed = function (knex) {
   return knex("ratings").then(() => {
     return knex("ratings").insert([

@@ -1,3 +1,4 @@
+// *** [ Function To Autopopulate Games & Consoles Relationship Data Into Games_Consoles Table ] *** //
 exports.seed = function (knex) {
   return knex("games_consoles")
     .truncate()

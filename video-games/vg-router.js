@@ -1,9 +1,11 @@
+// *** [ Imports ] *** //
 const router = require("express").Router();
 
 const Games = require("./vg-model");
 const { validateId, validateBody } = require("./vg-middleware");
 const restricted = require("../auth/restricted-middleware");
 
+// *** [ GET All Route ] *** //
 router.get("/", async (req, res, next) => {
   try {
     const games = await Games.find();
@@ -13,6 +15,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// *** [ Get Specified Or Random Route ] *** //
 router.get("/:id", validateId, async (req, res, next) => {
   try {
     if (req.randomGame) {
@@ -25,6 +28,7 @@ router.get("/:id", validateId, async (req, res, next) => {
   }
 });
 
+// *** [ POST Route ] *** //
 router.post("/", restricted, validateBody, async (req, res, next) => {
   const newGame = req.body;
 
@@ -36,6 +40,7 @@ router.post("/", restricted, validateBody, async (req, res, next) => {
   }
 });
 
+// *** [ PUT Route ] *** //
 router.put("/:id", restricted, validateId, async (req, res, next) => {
   const changes = req.body;
   const { id } = req.params;
@@ -48,6 +53,7 @@ router.put("/:id", restricted, validateId, async (req, res, next) => {
   }
 });
 
+// *** [ DELETE Route ] *** //
 router.delete("/:id", restricted, validateId, async (req, res, next) => {
   const { id } = req.params;
 
@@ -59,4 +65,5 @@ router.delete("/:id", restricted, validateId, async (req, res, next) => {
   }
 });
 
+// *** [ Exports ] *** //
 module.exports = router;

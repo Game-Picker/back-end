@@ -29,3 +29,15 @@ Post - /api/games - Creates a new game
 Put - /api/games/:id - Updates a specified game
 
 Delete - /api/games/:id - Deletes a specified game
+
+## Developers:
+
+Get - /api/developers - Gets all the developers
+
+Get - /api/developers/:id - Gets a specified developer
+
+Post - /api/developers - Creates a new developer
+
+Put - /api/developers/:id - Updates a specified developer
+
+Delete - /api/developers/:id - Deletes a specified developer

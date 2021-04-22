@@ -1,3 +1,4 @@
+// *** [ Function To Create Games, Consoles, Games_Consoles, Genres, Games_genres, Ratings, And Developers Tables ] *** //
 exports.up = function (knex) {
   return knex.schema
     .createTable("games", (table) => {
@@ -37,6 +38,7 @@ exports.up = function (knex) {
     });
 };
 
+// *** [ Function To Delete Games, Consoles, Game_Consoles, Genres, Games_genres, Ratings, And Developers Tables ] *** //
 exports.down = function (knex) {
   return knex.schema
     .dropTableIfExists("developers")

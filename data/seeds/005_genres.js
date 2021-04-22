@@ -1,3 +1,4 @@
+// *** [ Function To Autopopulate Genres Into Genres Table ] *** //
 exports.seed = function (knex) {
   return knex("genres").then(() => {
     return knex("genres").insert([

@@ -1,5 +1,7 @@
+// *** [ Imports ] *** //
 const Users = require("./user-model");
 
+// *** [ Function To Validate That Id Given Is An Existing Id In Users Table ] *** //
 const validateId = async (req, res, next) => {
   const { id } = req.params;
 
@@ -18,6 +20,7 @@ const validateId = async (req, res, next) => {
   }
 };
 
+// *** [ Exports ] *** //
 module.exports = {
   validateId,
 };

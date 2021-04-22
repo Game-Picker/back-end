@@ -1,5 +1,7 @@
+// *** [ Imports ] *** //
 const db = require("../data/db-config");
 
+// *** [ Exports ] *** //
 module.exports = {
   find,
   findById,
@@ -9,18 +11,22 @@ module.exports = {
   remove,
 };
 
+// *** [ Function To Get All Games From Games Table ] *** //
 function find() {
   return db("games");
 }
 
+// *** [ Function To Get Specified Game From Games Table ] *** //
 function findById(id) {
   return db("games").where({ id }).first();
 }
 
+// *** [ Function To Get Random Game From Games Table ] *** //
 function pickRandomGame() {
   return db("games").orderByRaw("RANDOM()").limit(1);
 }
 
+// *** [ Function To Create A New Game In Games Table ] *** //
 function create(game) {
   return db("games")
     .insert(game)
@@ -31,6 +37,7 @@ function create(game) {
     });
 }
 
+// *** [ Function To Change An Exisiting Game In Games Table ] *** //
 function update(id, changes) {
   return db("games")
     .where({ id })
@@ -40,6 +47,7 @@ function update(id, changes) {
     });
 }
 
+// *** [ Function To Remove An Exisiting Game From Games Table ] *** //
 function remove(id) {
   return db("games").where({ id }).del();
 }

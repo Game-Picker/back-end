@@ -1,3 +1,4 @@
+// *** [ Function To Autopopulate Games & Genres Relationship Data Into Games_Genres Table ] *** //
 exports.seed = function (knex) {
   return knex("games_genres")
     .truncate()

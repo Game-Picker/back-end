@@ -1,5 +1,7 @@
+// *** [ Imports ] *** //
 const bcrypt = require("bcryptjs");
 
+// *** [ Function To Autopopulate User Data Into Users Table ] *** //
 exports.seed = function (knex) {
   return knex("users")
     .truncate()

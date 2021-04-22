@@ -1,5 +1,7 @@
+// *** [ Imports ] *** //
 const Games = require("./vg-model");
 
+// *** [ Function To Validate That Id Given Is An Existing Id In Games Table ] *** //
 const validateId = async (req, res, next) => {
   const { id } = req.params;
 
@@ -22,6 +24,7 @@ const validateId = async (req, res, next) => {
   }
 };
 
+// *** [ Function To Validate That The Body Given Fits Schema Of Games Table ] *** //
 const validateBody = (req, res, next) => {
   const game = req.body;
 
@@ -42,6 +45,7 @@ const validateBody = (req, res, next) => {
   }
 };
 
+// *** [ Exports ] *** //
 module.exports = {
   validateId,
   validateBody,

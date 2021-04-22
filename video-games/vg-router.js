@@ -15,7 +15,6 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", validateId, async (req, res, next) => {
   try {
-    // console.log("This is in the router: ", req.randomGame);
     if (req.randomGame) {
       res.status(200).json(req.randomGame);
     } else {

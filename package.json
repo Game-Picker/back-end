@@ -1,24 +1,27 @@
 {
-  "name": "postgres-back-end",
+  "name": "back-end",
   "version": "1.0.0",
-  "description": "Base URL:",
+  "description": "Video Game API",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js"
+    "seeds": "npx knex seed:run",
+    "server": "nodemon index.js",
+    "migrate": "npx knex migrate:latest",
+    "rollback": "npx knex migrate:rollback",
+    "test": "cross-env DB_ENV=testing jest --watchAll --verbose --runInBand"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Game-Picker/postgres-back-end.git"
+    "url": "git+https://github.com/Game-Picker/back-end"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Game-Picker/postgres-back-end/issues"
+    "url": "https://github.com/Game-Picker/back-end/issues"
   },
-  "homepage": "https://github.com/Game-Picker/postgres-back-end#readme",
+  "homepage": "https://github.com/Game-Picker/back-end#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-session-knex": "^2.0.0",
@@ -33,5 +36,11 @@
     "knex-cleaner": "^1.3.1",
     "morgan": "^1.10.0",
     "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^7.24.0",
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
   }
 }

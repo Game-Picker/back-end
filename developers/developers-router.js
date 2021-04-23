@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 const Developers = require("./developers-model");
-const restricted = require("../auth/restricted-middleware");
+const { restricted } = require("../auth/restricted-middleware");
 const { validateId } = require("./developers-middleware");
 
 // *** [ GET All Route ] *** //

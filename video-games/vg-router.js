@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 const Games = require("./vg-model");
 const { validateId, validateBody } = require("./vg-middleware");
-const restricted = require("../auth/restricted-middleware");
+const { restricted } = require("../auth/restricted-middleware");
 
 // *** [ GET All Route ] *** //
 router.get("/", async (req, res, next) => {

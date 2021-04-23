@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("./secret");
 
 // *** [ Function To Restrict Use Of Routes By Unauthorized Users ] *** //
-module.exports = (req, res, next) => {
+const restricted = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
     return res.status(401).json({
@@ -25,4 +25,9 @@ module.exports = (req, res, next) => {
       }
     });
   }
+};
+
+// *** [ Exports ] *** //
+module.exports = {
+  restricted,
 };

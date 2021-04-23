@@ -1,5 +1,6 @@
 // *** [ Imports ] *** //
 const cookieParser = require("cookie-parser");
+const createError = require("http-errors");
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");

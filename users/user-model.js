@@ -6,6 +6,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  insert,
   update,
   remove,
 };
@@ -16,11 +17,17 @@ function find() {
 }
 
 // *** [ Functions To Get Specified User From Users Table ] *** //
-function findBy(filter) {
-  return db("users").where(filter).orderBy("id");
+function findBy(email) {
+  return db("users").where({ email }).orderBy("id");
 }
 
 function findById(id) {
+  return db("users").where({ id }).first();
+}
+
+// *** [ Function To Create New User ] *** //
+async function insert(user) {
+  const [id] = await db("users").insert(user);
   return db("users").where({ id }).first();
 }
 

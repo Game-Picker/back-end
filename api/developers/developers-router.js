@@ -2,8 +2,8 @@
 const router = require("express").Router();
 
 const Developers = require("./developers-model");
-const { restricted } = require("../auth/restricted-middleware");
-const { validateId } = require("./developers-middleware");
+const { restricted } = require("../middleware/restricted-middleware");
+const { validateId } = require("../middleware/developers-middleware");
 
 // *** [ GET All Route ] *** //
 router.get("/", restricted, async (req, res, next) => {

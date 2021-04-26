@@ -1,5 +1,5 @@
 // *** [ Imports ] *** //
-const Games = require("./vg-model");
+const Games = require("../video-games/vg-model");
 
 // *** [ Function To Validate That Id Given Is An Existing Id In Games Table ] *** //
 const validateId = async (req, res, next) => {

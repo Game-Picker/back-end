@@ -3,9 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
 
-const { jwtSecret } = require("./secret");
+const { jwtSecret } = require("../secret/secret");
 const Users = require("../users/user-model");
-const { uniqueEmail, emailExists } = require("./auth-middleware");
+const { uniqueEmail, emailExists } = require("../middleware/auth-middleware");
 
 // *** [ Register Route] *** //
 router.post("/register", uniqueEmail, async (req, res, next) => {
@@ -17,7 +17,7 @@ router.post("/register", uniqueEmail, async (req, res, next) => {
       first_name,
       last_name,
       email,
-      password: bcrypt.hashSync(password, parseInt(process.env.BCRYPT_ROUNDS)),
+      password: bcrypt.hashSync(password, process.env.BCRYPT_ROUNDS),
       admin,
     });
     console.log("NEW USER: ", newUser);

@@ -1,5 +1,5 @@
 // *** [ Imports ] *** //
-const Users = require("./user-model");
+const Users = require("../users/user-model");
 
 // *** [ Function To Validate That Id Given Is An Existing Id In Users Table ] *** //
 const validateId = async (req, res, next) => {

@@ -7,10 +7,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 
 const indexRouter = require("./index-router");
-const authRouter = require("../auth/auth-router");
-const userRouter = require("../users/user-router");
-const gamesRouter = require("../video-games/vg-router");
-const developersRouter = require("../developers/developers-router");
+const authRouter = require("./auth/auth-router");
+const userRouter = require("./users/user-router");
+const gamesRouter = require("./video-games/vg-router");
+const developersRouter = require("./developers/developers-router");
 
 // *** [ Server Declaration ] *** //
 const server = express();

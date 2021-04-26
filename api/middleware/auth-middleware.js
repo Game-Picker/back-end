@@ -1,7 +1,7 @@
 // *** [ Imports ] *** //
 const jwt = require("jsonwebtoken");
 
-const { jwtSecret } = require("./secret");
+const { jwtSecret } = require("../secret/secret");
 const Users = require("../users/user-model");
 
 const restricted = (req, res, next) => {

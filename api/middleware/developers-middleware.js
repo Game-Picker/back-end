@@ -1,5 +1,5 @@
 // *** [ Imports ] *** //
-const Developers = require("./developers-model");
+const Developers = require("../developers/developers-model");
 
 // *** [ Function To Validate That Id Given Is An Existing Id In Developers Table ] *** //
 const validateId = async (req, res, next) => {

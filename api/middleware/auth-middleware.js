@@ -4,29 +4,6 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../secret/secret");
 const Users = require("../users/user-model");
 
-const restricted = (req, res, next) => {
-  const token = req.headers.authorization;
-  if (!token) {
-    return res.status(401).json({
-      message: "Need a token",
-    });
-  } else {
-    jwt.verify(token, jwtSecret, (error, decoded) => {
-      if (error) {
-        return res.status(401).json({
-          message: "Bad Token",
-          errorMessage: error.message,
-          stack: error.stack,
-        });
-      } else {
-        console.log("Decoded Token: ", decoded);
-        req.decodedJwt = decoded;
-        next();
-      }
-    });
-  }
-};
-
 const uniqueEmail = async (req, res, next) => {
   const { email } = req.body;
   console.log("EMAIL: ", email);
@@ -73,7 +50,6 @@ const validateCredentials = (req, res, next) => {
 
 // *** [ Exports ] *** //
 module.exports = {
-  restricted,
   uniqueEmail,
   emailExists,
   validateCredentials,

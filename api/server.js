@@ -1,10 +1,15 @@
 // *** [ Imports ] *** //
 const cookieParser = require("cookie-parser");
+const { Store } = require("express-session");
 const createError = require("http-errors");
+const session = require("express-session");
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+
+const { jwtSecret } = require("./secret/secret");
+const knex = require("../data/db-config");
 
 const indexRouter = require("./index-router");
 const authRouter = require("./auth/auth-router");
@@ -21,6 +26,26 @@ server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(helmet());
 server.use(cors());
+server.use(
+  session({
+    name: "David Viodes",
+    secret: jwtSecret,
+    saveUninitialized: false,
+    resave: false,
+    store: new Store({
+      knex,
+      createtable: true,
+      clearInterval: 1000 * 60 * 10,
+      tablename: "sessions",
+      sidfieldname: "sid",
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 30,
+      secure: false,
+      httpOnly: true,
+    },
+  })
+);
 
 // *** [ Routers ] *** //
 server.use("/", indexRouter);

@@ -7,6 +7,18 @@ const { jwtSecret } = require("../secret/secret");
 const Users = require("../users/user-model");
 const { uniqueEmail, emailExists } = require("../middleware/auth-middleware");
 
+// *** [ Function To Create A Token ] *** //
+const makeToken = (user) => {
+  const payload = {
+    subject: user.id,
+    email: user.email,
+  };
+  const options = {
+    expiresIn: "1d",
+  };
+  return jwt.sign(payload, jwtSecret, options);
+};
+
 // *** [ Register Route] *** //
 router.post("/register", uniqueEmail, async (req, res, next) => {
   try {
@@ -21,7 +33,7 @@ router.post("/register", uniqueEmail, async (req, res, next) => {
       admin,
     });
     console.log("NEW USER: ", newUser);
-    res.status(200).json(newUser);
+    res.status(201).json(newUser);
   } catch (err) {
     next(err);
   }
@@ -48,18 +60,6 @@ router.post("/login", emailExists, async (req, res, next) => {
     next(err);
   }
 });
-
-// *** [ Function To Create A Token ] *** //
-const makeToken = (user) => {
-  const payload = {
-    subject: user.id,
-    email: user.email,
-  };
-  const options = {
-    expiresIn: "2h",
-  };
-  return jwt.sign(payload, jwtSecret, options);
-};
 
 // *** [ Exports ] *** //
 module.exports = router;
